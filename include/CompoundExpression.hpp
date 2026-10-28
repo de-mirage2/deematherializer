@@ -11,6 +11,11 @@ private:
   std::shared_ptr<Expression> left_;
   std::shared_ptr<Expression> right_;
 
+protected:
+  // Output
+
+  void print(std::ostream &stream) const override;
+
 public:
   // Constructors - std::shared_ptr<Expression>
 
@@ -27,19 +32,21 @@ public:
 
   // Mutators
 
-  [[nodiscard]] Connective &connective() noexcept;
+  [[nodiscard]] Connective connective() const noexcept;
 
-  [[nodiscard]] std::shared_ptr<Expression> left() noexcept;
+  std::shared_ptr<Expression> left(std::shared_ptr<Expression> left) noexcept;
 
-  [[nodiscard]] std::shared_ptr<Expression> right() noexcept;
+  std::shared_ptr<Expression> right(std::shared_ptr<Expression> right) noexcept;
+
+  // Getters
+
+  [[nodiscard]] std::shared_ptr<Expression> left() const noexcept;
+
+  [[nodiscard]] std::shared_ptr<Expression> right() const noexcept;
 
   // Evaluate
 
   [[nodiscard]] bool evaluate() const override;
-
-  // Parse Operand
-
-  // [[nodiscard]] static Connective parseOperand(char c);
 };
 
 #endif

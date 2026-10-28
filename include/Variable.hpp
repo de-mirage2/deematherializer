@@ -9,12 +9,15 @@ private:
   std::string name_;
   bool value_;
 
+protected:
+  // Output
+
+  void print(std::ostream &stream) const override;
+
 public:
   // Constructors
 
   explicit Variable(std::string name, bool value);
-
-  Variable(bool value);
 
   // Clone
 
@@ -30,4 +33,5 @@ public:
 
   [[nodiscard]] bool evaluate() const override;
 };
+
 #endif

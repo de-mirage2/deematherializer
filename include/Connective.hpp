@@ -8,7 +8,11 @@ enum class Connective {
   IMPLICATION = '>',
   CONVERSE = '<',
   BICONDITIONAL = '#',
-  // EXCLUSIVE_DISJUNCTION = '^'
+  EXCLUSIVE_DISJUNCTION = '^'
 };
+
+// Parse Operand
+
+// [[nodiscard]] static Connective parseOperand(char c);
 
 #endif

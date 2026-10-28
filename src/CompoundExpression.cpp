@@ -23,15 +23,33 @@ std::shared_ptr<Expression> CompoundExpression::clone() const {
 
 // Mutators
 
-[[nodiscard]] Connective &CompoundExpression::connective() noexcept {
+[[nodiscard]] Connective CompoundExpression::connective() const noexcept {
   return connective_;
 }
 
-[[nodiscard]] std::shared_ptr<Expression> CompoundExpression::left() noexcept {
+std::shared_ptr<Expression>
+CompoundExpression::left(std::shared_ptr<Expression> left) noexcept {
+  std::shared_ptr<Expression> old = std::move(left_);
+  left_ = std::move(left);
+  return old;
+}
+
+std::shared_ptr<Expression>
+CompoundExpression::right(std::shared_ptr<Expression> right) noexcept {
+  std::shared_ptr<Expression> old = std::move(right_);
+  right_ = std::move(right);
+  return old;
+}
+
+// Getters
+
+[[nodiscard]] std::shared_ptr<Expression>
+CompoundExpression::left() const noexcept {
   return left_;
 }
 
-[[nodiscard]] std::shared_ptr<Expression> CompoundExpression::right() noexcept {
+[[nodiscard]] std::shared_ptr<Expression>
+CompoundExpression::right() const noexcept {
   return right_;
 }
 
@@ -58,7 +76,21 @@ std::shared_ptr<Expression> CompoundExpression::clone() const {
     bool leftEval = left_->evaluate(), rightEval = right_->evaluate();
     return (leftEval && rightEval) || (!leftEval && !rightEval);
   }
+  case Connective::EXCLUSIVE_DISJUNCTION: {
+    return left_->evaluate() ^ right_->evaluate();
+  }
   default:
     throw std::runtime_error("Error: Invalid CompoundExpression");
   }
 }
+
+// Output
+
+void CompoundExpression::print(std::ostream &stream) const {
+  if (connective_ == Connective::NEGATION) {
+    stream << '!' << *left_;
+  } else {
+    stream << '(' << *left_ << ' ' << static_cast<char>(connective_) << ' '
+           << *right_ << ')';
+  }
+};

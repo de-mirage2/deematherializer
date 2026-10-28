@@ -6,8 +6,6 @@
 
 Variable::Variable(std::string name, bool value) : name_(name), value_(value) {}
 
-Variable::Variable(bool value) : name_(nullptr), value_(value) {}
-
 // Clone
 
 std::shared_ptr<Expression> Variable::clone() const {
@@ -23,3 +21,7 @@ std::shared_ptr<Expression> Variable::clone() const {
 // Evaluate
 
 [[nodiscard]] bool Variable::evaluate() const { return value_; }
+
+// Output
+
+void Variable::print(std::ostream &stream) const { stream << name_; };
