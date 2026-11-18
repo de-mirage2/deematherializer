@@ -8,6 +8,8 @@
 int main() {
   std::cout << std::boolalpha;
 
+  // variable tests
+
   auto p = std::make_shared<Variable>("p", true),
        q = std::make_shared<Variable>("q", false),
        r = std::make_shared<Variable>("r", true);
@@ -17,6 +19,8 @@ int main() {
             << '\n';
   std::cout << "r->name() r->evaluate() = " << r->name() << ' ' << r->evaluate()
             << '\n';
+
+  // compound expression with shared pointers
 
   auto alpha =
       std::make_shared<CompoundExpression>(Connective::CONJUNCTION, p, q);
@@ -40,5 +44,17 @@ int main() {
 
   std::cout << "changed; *omega omega->evaluate() = " << *omega << ' '
             << omega->evaluate() << '\n';
+
+  // compound expression with anonymous shared pointers
+
+  auto foo = CompoundExpression(Connective::DISJUNCTION, p, q);
+  auto bar = CompoundExpression(Connective::NEGATION, p);
+
+  auto baz = CompoundExpression(Connective::IMPLICATION,
+                                std::make_shared<CompoundExpression>(foo),
+                                std::make_shared<CompoundExpression>(bar));
+
+  std::cout << "baz baz.evaluate() = " << baz << ' ' << baz.evaluate() << '\n';
+
   return 0;
 }

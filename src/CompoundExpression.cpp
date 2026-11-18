@@ -7,7 +7,12 @@
 
 CompoundExpression::CompoundExpression(Connective connective,
                                        std::shared_ptr<Expression> left)
-    : connective_(connective), left_(std::move(left)), right_(nullptr) {};
+    : connective_(connective), left_(std::move(left)), right_(nullptr) {
+  if (connective != Connective::NEGATION) {
+    throw std::runtime_error("cannot construct compound expression of a single "
+                             "variable with a connective that is not negation");
+  }
+}
 
 CompoundExpression::CompoundExpression(Connective connective,
                                        std::shared_ptr<Expression> left,

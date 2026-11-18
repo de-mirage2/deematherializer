@@ -25,7 +25,7 @@ target_include_directories(DEEMATHERIALIZER
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
-# Warnings
+# environment-dependent warnings
 if(MSVC)
     target_compile_options(DEEMATHERIALIZER PRIVATE /W4 /permissive-)
 else()
