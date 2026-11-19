@@ -1,8 +1,11 @@
+#pragma once
+
 #ifndef VARIABLE_HPP
 #define VARIABLE_HPP
 
 #include "Expression.hpp"
-#include <string>
+
+namespace deemath::expression {
 
 class Variable : public Expression {
 private:
@@ -33,5 +36,7 @@ public:
 
   [[nodiscard]] bool evaluate() const override;
 };
+
+} // namespace deemath::expression
 
 #endif

@@ -1,34 +1,32 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(DEEMATHERIALIZER VERSION 1.0.0 LANGUAGES CXX)
+project(Deematherializer VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Impl. files in src/
-file(GLOB_RECURSE DEEMATHERIALIZER_SOURCES CONFIGURE_DEPENDS
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx"
-)
+include(CTest)
 
-# Build the application from main.cpp and impl. files
-add_executable(DEEMATHERIALIZER
-    main.cpp
-    ${DEEMATHERIALIZER_SOURCES}
-)
+if(BUILD_TESTING)
+  include(FetchContent)
 
-# Header files in include/
-target_include_directories(DEEMATHERIALIZER
-    PRIVATE
-        "${CMAKE_CURRENT_SOURCE_DIR}/include"
-)
+  FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  )
 
-# environment-dependent warnings
-if(MSVC)
-    target_compile_options(DEEMATHERIALIZER PRIVATE /W4 /permissive-)
-else()
-    target_compile_options(DEEMATHERIALIZER PRIVATE -Wall -Wextra -Wpedantic)
+  if(MSVC)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  endif()
+
+  FetchContent_MakeAvailable(googletest)
+  include(GoogleTest)
 endif()
 
+add_subdirectory(expression)
+add_subdirectory(proof)
+
+# # Build the application from main.cpp and impl. files
+# add_executable(Deematherializer main.cpp)

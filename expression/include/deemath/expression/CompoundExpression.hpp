@@ -1,9 +1,13 @@
+#pragma once
+
 #ifndef COMPOUNDEXPRESSION_HPP
 #define COMPOUNDEXPRESSION_HPP
 
 #include "Connective.hpp"
 #include "Expression.hpp"
 #include <memory>
+
+namespace deemath::expression {
 
 class CompoundExpression : public Expression {
 private:
@@ -17,7 +21,7 @@ protected:
   void print(std::ostream &stream) const override;
 
 public:
-  // Constructors - std::shared_ptr<Expression>
+  // Constructors
 
   explicit CompoundExpression(Connective connective,
                               std::shared_ptr<Expression> left);
@@ -32,13 +36,13 @@ public:
 
   // Mutators
 
-  [[nodiscard]] Connective connective() const noexcept;
-
   std::shared_ptr<Expression> left(std::shared_ptr<Expression> left) noexcept;
 
   std::shared_ptr<Expression> right(std::shared_ptr<Expression> right) noexcept;
 
   // Getters
+
+  [[nodiscard]] Connective connective() const noexcept;
 
   [[nodiscard]] std::shared_ptr<Expression> left() const noexcept;
 
@@ -48,5 +52,7 @@ public:
 
   [[nodiscard]] bool evaluate() const override;
 };
+
+} // namespace deemath::expression
 
 #endif

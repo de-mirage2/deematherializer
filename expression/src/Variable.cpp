@@ -1,6 +1,9 @@
-#include "../include/Variable.hpp"
+#include <deemath/expression/Expression.hpp>
+#include <deemath/expression/Variable.hpp>
 
 #include <string>
+
+namespace deemath::expression {
 
 // Constructors
 
@@ -25,3 +28,5 @@ std::shared_ptr<Expression> Variable::clone() const {
 // Output
 
 void Variable::print(std::ostream &stream) const { stream << name_; };
+
+} // namespace deemath::expression

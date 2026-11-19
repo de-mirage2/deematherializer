@@ -1,8 +1,12 @@
+#pragma once
+
 #ifndef EXPRESSION_HPP
 #define EXPRESSION_HPP
 
 #include <memory>
 #include <ostream>
+
+namespace deemath::expression {
 
 class Expression {
 private:
@@ -25,5 +29,7 @@ inline std::ostream &operator<<(std::ostream &stream,
   expression.print(stream);
   return stream;
 };
+
+} // namespace deemath::expression
 
 #endif

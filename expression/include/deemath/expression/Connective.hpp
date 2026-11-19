@@ -1,5 +1,9 @@
+#pragma once
+
 #ifndef CONNECTIVE_HPP
 #define CONNECTIVE_HPP
+
+namespace deemath::expression {
 
 enum class Connective {
   NEGATION = '~',
@@ -10,6 +14,8 @@ enum class Connective {
   BICONDITIONAL = '#',
   EXCLUSIVE_DISJUNCTION = '^'
 };
+
+}
 
 // Parse Operand
 

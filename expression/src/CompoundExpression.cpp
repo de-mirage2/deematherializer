@@ -1,7 +1,11 @@
-#include "../include/CompoundExpression.hpp"
+#include <deemath/expression/CompoundExpression.hpp>
+#include <deemath/expression/Expression.hpp>
+#include <deemath/expression/Variable.hpp>
 
 #include <memory>
 #include <stdexcept>
+
+namespace deemath::expression {
 
 // Constructors - std::shared_ptr<Expression>
 
@@ -99,3 +103,5 @@ void CompoundExpression::print(std::ostream &stream) const {
            << *right_ << ')';
   }
 };
+
+} // namespace deemath::expression
