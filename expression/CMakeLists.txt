@@ -11,7 +11,7 @@ target_include_directories(deemath_expression
 )
 
 if(BUILD_TESTING)
-    add_executable(deemath_expression_tests tests/expression_demo.cpp)
+    add_executable(deemath_expression_tests "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 
     target_link_libraries(deemath_expression_tests PRIVATE
         deemath::expression

@@ -15,11 +15,29 @@ std::shared_ptr<Expression> Variable::clone() const {
   return std::make_shared<Variable>(*this);
 }
 
+// Getters
+
+[[nodiscard]] const std::string &Variable::name() const noexcept {
+  return name_;
+}
+
+[[nodiscard]] const bool &Variable::value() const noexcept { return value_; }
+
+[[nodiscard]] bool value(bool value) noexcept;
+
 // Mutators
 
-[[nodiscard]] std::string &Variable::name() noexcept { return name_; }
+std::string Variable::name(std::string name) noexcept {
+  std::string prev_name = name_;
+  name_ = name;
+  return prev_name;
+}
 
-[[nodiscard]] bool &Variable::value() noexcept { return value_; }
+bool Variable::value(bool value) noexcept {
+  bool prev_value = value_;
+  value_ = value;
+  return prev_value;
+}
 
 // Evaluate
 

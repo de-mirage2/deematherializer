@@ -27,7 +27,8 @@ CompoundExpression::CompoundExpression(Connective connective,
 // Clone
 
 std::shared_ptr<Expression> CompoundExpression::clone() const {
-  return std::make_shared<CompoundExpression>(*this);
+  return std::make_shared<CompoundExpression>(connective_, left_->clone(),
+                                              right_->clone());
 }
 
 // Mutators

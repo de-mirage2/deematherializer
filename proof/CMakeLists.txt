@@ -15,7 +15,7 @@ target_link_libraries(deemath_proof
 )
 
 if(BUILD_TESTING)
-    add_executable(deemath_proof_tests tests/proof_first.cpp)
+    add_executable(deemath_proof_tests "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 
     target_link_libraries(deemath_proof_tests PRIVATE
         deemath::proof

@@ -26,11 +26,17 @@ public:
 
   std::shared_ptr<Expression> clone() const override;
 
+  // Getters
+
+  [[nodiscard]] const std::string &name() const noexcept;
+
+  [[nodiscard]] const bool &value() const noexcept;
+
   // Mutators
 
-  [[nodiscard]] std::string &name() noexcept;
+  std::string name(std::string name) noexcept;
 
-  [[nodiscard]] bool &value() noexcept;
+  bool value(bool value) noexcept;
 
   // Evaluate
 
