@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
 project(Deematherializer VERSION 1.0.0 LANGUAGES CXX)
 
@@ -9,12 +9,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 include(CTest)
 
 if(BUILD_TESTING)
+  enable_testing()
   include(FetchContent)
 
   FetchContent_Declare(
     googletest
-    URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
-    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.18.0
   )
 
   if(MSVC)
