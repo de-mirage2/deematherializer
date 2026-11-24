@@ -48,18 +48,20 @@ TEST(VariableUnitTest, VariablePointerEvaluate) {
   EXPECT_EQ("1", out.str());
 }
 
-// TEST(VariableUnitTest, VariableCloneToPointer) {
-//   const deemath::expression::Variable p{"p", true};
-//   std::shared_ptr<deemath::expression::Expression> pPrime = p.clone();
-//   std::ostringstream out;
-//   out << pPrime->evaluate();
-//   EXPECT_EQ("1", out.str());
-// }
+TEST(VariableUnitTest, VariableCloneToPointer) {
+  deemath::expression::Variable p{"p", true};
+  auto pPrime =
+      std::dynamic_pointer_cast<deemath::expression::Variable>(p.clone());
+  std::ostringstream out;
+  out << pPrime->evaluate() << p.value(false) << pPrime->evaluate()
+      << pPrime->value(false) << pPrime->evaluate();
+  EXPECT_EQ("11110", out.str());
+}
 
-TEST(VariableUnitTest, ConstVariableNameMutability) {
+TEST(VariableUnitTest, VariableNameMutability) {
   deemath::expression::Variable named{"foo", true};
   const std::string &ref = named.name();
   std::ostringstream out;
-  out << ref << named.name("bar") << ref;
-  EXPECT_EQ("foobarbar", out.str());
+  out << ref << named.name("bar") << ref << named.name("baz") << ref;
+  EXPECT_EQ("foofoobarbarbaz", out.str());
 }
